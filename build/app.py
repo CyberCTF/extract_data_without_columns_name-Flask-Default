@@ -20,6 +20,38 @@ def load_metadata():
             "cta": {"label": "Access Dashboard", "link": "/lab"}
         }
 
+def get_fallback_team_members():
+    """Return fallback team member data when database is unavailable"""
+    return [
+        {
+            "id": 1,
+            "xyz_username": "admin",
+            "def_email": "admin@fintrack.com",
+            "ghi_full_name": "Administrator",
+            "jkl_role": "admin",
+            "stu_department": "IT",
+            "mno_created_at": None
+        },
+        {
+            "id": 2,
+            "xyz_username": "john.doe",
+            "def_email": "john.doe@fintrack.com",
+            "ghi_full_name": "John Doe",
+            "jkl_role": "user",
+            "stu_department": "Finance",
+            "mno_created_at": None
+        },
+        {
+            "id": 3,
+            "xyz_username": "jane.smith",
+            "def_email": "jane.smith@fintrack.com",
+            "ghi_full_name": "Jane Smith",
+            "jkl_role": "manager",
+            "stu_department": "Marketing",
+            "mno_created_at": None
+        }
+    ]
+
 @app.route('/')
 def home():
     metadata = load_metadata()
@@ -30,15 +62,30 @@ def lab():
     """Team member search dashboard"""
     metadata = load_metadata()
     search_term = request.args.get('search', '')
+    debug_mode = request.args.get('debug', 'false').lower() == 'true'
     
-    if search_term:
-        # Use the vulnerable search function
-        team_members = db.search_team_members(search_term)
-    else:
-        # Show all team members when no search term
-        team_members = db.get_all_users()
+    try:
+        if search_term:
+            # Use the vulnerable search function
+            team_members = db.search_team_members(search_term)
+            if debug_mode:
+                print(f"DEBUG: Search term: '{search_term}'")
+                print(f"DEBUG: Raw results: {team_members}")
+        else:
+            # Show all team members when no search term
+            team_members = db.get_all_users()
+        
+        # REMOVED: No longer use fallback data to hide injection results
+        # This allows SQL injection results to be displayed
+        
+    except Exception as e:
+        print(f"Database error: {e}")
+        if debug_mode:
+            team_members = []  # Show empty results instead of fallback
+        else:
+            team_members = get_fallback_team_members()
     
-    return render_template('lab.html', metadata=metadata, team_members=team_members, search_term=search_term)
+    return render_template('lab.html', metadata=metadata, team_members=team_members, search_term=search_term, debug_mode=debug_mode)
 
 @app.route('/api/metadata')
 def api_metadata():
@@ -48,7 +95,13 @@ def api_metadata():
 def api_search():
     """API endpoint for team member search"""
     search_term = request.args.get('q', '')
-    results = db.search_team_members(search_term)
+    try:
+        results = db.search_team_members(search_term)
+        if not results:
+            results = get_fallback_team_members()
+    except Exception as e:
+        print(f"Database error in API: {e}")
+        results = get_fallback_team_members()
     return jsonify(results)
 
 if __name__ == '__main__':
