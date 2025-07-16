@@ -1,0 +1,44 @@
+{
+  "site": {
+    "name": "Ecommerce",
+    "description": "A Capture The Flag platform for security challenges",
+    "logo": "/logo.svg",
+    "copyright": "2025 Cyber CTF"
+  },
+  "navigation": {
+    "main": [
+      { "link": "/", "title": "Home" }
+    ],
+    "auth": [
+      { "link": "/login", "title": "Login" },
+      { "link": "/register", "title": "Register" }
+    ]
+  },
+  "footer": {
+    "links": [
+      { "link": "/", "title": "Home" }
+    ],
+    "social": [
+      {
+        "name": "Website",
+        "href": "https://www.cyberctf.fr",
+        "icon": "website"
+      },
+      {
+        "name": "GitHub",
+        "href": "https://github.com/cyberctf",
+        "icon": "github"
+      }
+    ]
+  },
+  "challenge": {
+    "title": "Database Security Challenge",
+    "description": "Find and exploit the SQL injection vulnerability in the login form. Use your knowledge of database security to bypass authentication.",
+    "skills": ["SQL", "Security", "Web", "Authentication"],
+    "points": 160
+  },
+  "cta": {
+    "label": "Start the lab",
+    "link": "/lab"
+  }
+} 
