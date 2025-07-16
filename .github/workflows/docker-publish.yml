@@ -25,8 +25,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./build
-          file: ./build/Dockerfile
+          context: .
+          file: ./deploy/Dockerfile
           push: true
           tags: cyberctf/extract_data_without_columns_name:latest
 
