@@ -33,7 +33,7 @@ jobs:
       - name: Update DockerHub README
         uses: peter-evans/dockerhub-description@v3
         with:
-          username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_OAT }}
+          username: ${{ secrets.DOCK_USER }}
+          password: ${{ secrets.DOCK_PASS }}
           repository: cyberctf/extract_data_without_columns_name
           readme-filepath: ./deploy/README.md 
