@@ -1,13 +1,14 @@
 {
   "site": {
-    "name": "Ecommerce",
-    "description": "A Capture The Flag platform for security challenges",
+    "name": "FinTrack",
+    "description": "Financial tracking platform for startups and growing businesses",
     "logo": "/logo.svg",
-    "copyright": "2025 Cyber CTF"
+    "copyright": "2025 FinTrack"
   },
   "navigation": {
     "main": [
-      { "link": "/", "title": "Home" }
+      { "link": "/", "title": "Home" },
+      { "link": "/lab", "title": "Dashboard" }
     ],
     "auth": [
       { "link": "/login", "title": "Login" },
@@ -16,29 +17,30 @@
   },
   "footer": {
     "links": [
-      { "link": "/", "title": "Home" }
+      { "link": "/", "title": "Home" },
+      { "link": "/lab", "title": "Dashboard" }
     ],
     "social": [
       {
         "name": "Website",
-        "href": "https://www.cyberctf.fr",
+        "href": "https://www.fintrack.com",
         "icon": "website"
       },
       {
         "name": "GitHub",
-        "href": "https://github.com/cyberctf",
+        "href": "https://github.com/fintrack",
         "icon": "github"
       }
     ]
   },
   "challenge": {
-    "title": "Database Security Challenge",
-    "description": "Find and exploit the SQL injection vulnerability in the login form. Use your knowledge of database security to bypass authentication.",
-    "skills": ["SQL", "Security", "Web", "Authentication"],
+    "title": "Team Member Search System",
+    "description": "Search and manage team members in the FinTrack platform. Use the search functionality to find specific team members by name, username, or email.",
+    "skills": ["Database", "Web Development", "User Management", "Search"],
     "points": 160
   },
   "cta": {
-    "label": "Start the lab",
+    "label": "Access Dashboard",
     "link": "/lab"
   }
 } 
